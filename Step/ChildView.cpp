@@ -118,8 +118,10 @@ void CChildView::OnGLDraw(CDC* pDC)
 	//
 	
 	// Animation
+	m_hook1->SetTranslate(1.5, 1.5, 1.5);
 	m_hook1->SetRotate(m_spinAngle, 0, 1, 0);
-	m_hook2->SetRotate(-m_spinAngle, 0, 0, 1);
+	m_hook1->SetTranslate(-1.5, -1.5, -1.5);
+	//m_hook2->SetRotate(-m_spinAngle, 0, 0, 1);
 
 	m_scenegraph->Render();
 }
@@ -198,24 +200,28 @@ CSGPtr<CSGRotationTranslation> CChildView::box(double p_x, double p_y, double p_
 void CChildView::CreateSceneGraph()
 {
 
-	CSGPtr<CSGRotationTranslation> rt = box(2, 3, 4);
-
 	CSGPtr<CSGRotationTranslation> root = new CSGRotationTranslation();
 	CSGPtr<CSGRotationTranslation> rt1 = new CSGRotationTranslation();
 	CSGPtr<CSGRotationTranslation> rt2 = new CSGRotationTranslation();
+	CSGPtr<CSGRotationTranslation> rt = box(3, 3, 3);
+
 
 	root->AddChild(rt1);
-	root->AddChild(rt2);
+	//root->AddChild(rt2);
 
 	rt1->AddChild(rt);
-	rt2->AddChild(rt);
+	//rt2->AddChild(rt);
 
-	rt1->SetTranslate(5, 0, 0);
-	rt2->SetTranslate(-5, 0, 0);
+	//rt1->SetTranslate(1.5, 1.5, 1.5);
+
+	//rt2->SetTranslate(-5, 0, 0);
 
 	m_scenegraph = root;
+	//rt1->SetTranslate(-1.5, -1.5, -1.5);
 	m_hook1 = rt1;
-	m_hook2 = rt2;
+
+	//m_hook2 = rt2;
+	// dfd
 }
 
 void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
